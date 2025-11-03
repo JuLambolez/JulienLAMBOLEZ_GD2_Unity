@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Target_Hard : MonoBehaviour
 {
-    [SerializeField] private int _targetValue = 1;
-    private void OnCollisionEnter(Collision other)
+    [SerializeField] private int _targetValue = -3;
+
+    public void OnPlayerCollect(GameObject player)
     {
-        if(other.gameObject.GetComponent<Player_Collect>() !=null)
+        Player_Collect collector = player.GetComponent<Player_Collect>();
+        if (collector != null)
         {
-            other.gameObject.GetComponent<Player_Collect>().UpdateScore(_targetValue);
+            collector.UpdateScore(_targetValue);
             Destroy(gameObject);
         }
-        
     }
 }

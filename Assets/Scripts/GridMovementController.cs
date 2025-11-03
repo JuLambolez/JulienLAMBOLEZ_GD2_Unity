@@ -11,6 +11,7 @@ public class GridMovementController : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMoving = false;
     private bool reachedGoal = false;
+    private bool isLastMove = false;
 
     private LevelGrid levelGrid;
     private MoveCounter moveCounter;
@@ -102,7 +103,10 @@ public class GridMovementController : MonoBehaviour
 
             if (moveCounter != null)
             {
-                moveCounter.UseMove(isGoalReached);
+                bool willBeLastMove = moveCounter.MovesRemaining == 1;
+                isLastMove = willBeLastMove && !isGoalReached;
+
+                moveCounter.UseMove(isGoalReached, deferGameOver: true);
             }
         }
     }
@@ -120,6 +124,8 @@ public class GridMovementController : MonoBehaviour
             transform.position = targetPosition;
             isMoving = false;
 
+            CheckForCollectibles();
+
             if (reachedGoal)
             {
                 reachedGoal = false;
@@ -127,6 +133,18 @@ public class GridMovementController : MonoBehaviour
                 if (gameManager != null)
                 {
                     gameManager.LevelComplete();
+                }
+            }
+            else if (isLastMove)
+            {
+                isLastMove = false;
+                if (moveCounter != null && moveCounter.MovesRemaining <= 0)
+                {
+                    GameManager gameManager = FindFirstObjectByType<GameManager>();
+                    if (gameManager != null)
+                    {
+                        gameManager.GameOver();
+                    }
                 }
             }
         }
@@ -143,5 +161,30 @@ public class GridMovementController : MonoBehaviour
         transform.position = targetPosition;
         isMoving = false;
         reachedGoal = false;
+        isLastMove = false;
+    }
+
+    private void CheckForCollectibles()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.3f);
+
+        foreach (Collider col in colliders)
+        {
+            if (col.gameObject != gameObject)
+            {
+                Target_Soft softTarget = col.GetComponent<Target_Soft>();
+                if (softTarget != null)
+                {
+                    softTarget.OnPlayerCollect(gameObject);
+                    continue;
+                }
+
+                Target_Hard hardTarget = col.GetComponent<Target_Hard>();
+                if (hardTarget != null)
+                {
+                    hardTarget.OnPlayerCollect(gameObject);
+                }
+            }
+        }
     }
 }

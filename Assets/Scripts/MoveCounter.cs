@@ -20,14 +20,14 @@ public class MoveCounter : MonoBehaviour
         ResetMoves();
     }
 
-    public void UseMove(bool isWinningMove = false)
+    public void UseMove(bool isWinningMove = false, bool deferGameOver = false)
     {
         if (movesRemaining > 0)
         {
             movesRemaining--;
             OnMovesChanged?.Invoke(movesRemaining);
 
-            if (movesRemaining <= 0 && !isWinningMove)
+            if (movesRemaining <= 0 && !isWinningMove && !deferGameOver)
             {
                 OnNoMovesRemaining?.Invoke();
                 GameManager gameManager = FindFirstObjectByType<GameManager>();

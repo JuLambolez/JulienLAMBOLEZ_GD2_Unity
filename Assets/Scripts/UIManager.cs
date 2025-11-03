@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Textes")]
     [SerializeField] private TextMeshProUGUI movesText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     private MoveCounter moveCounter;
 
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
             UpdateMovesText(moveCounter.MovesRemaining);
         }
 
+        Player_Collect.OnTargetCollected += UpdateScoreText;
+
         HideAllScreens();
 
         if (gameplayUI != null)
@@ -31,11 +34,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        Player_Collect.OnTargetCollected -= UpdateScoreText;
+    }
+
     private void UpdateMovesText(int movesRemaining)
     {
         if (movesText != null)
         {
-            movesText.text = $"Remaining Moves: {movesRemaining}";
+            movesText.text = $"Coups restants: {movesRemaining}";
+        }
+    }
+
+    private void UpdateScoreText(int score)
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = $"Score: {score}";
         }
     }
 

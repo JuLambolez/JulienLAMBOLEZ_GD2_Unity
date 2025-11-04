@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971e8c46555aecc468bbe8f7e7ecaddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelSceneName: Level2
+  nextLevelSceneName: Level3
   mainMenuSceneName: MainMenu
 --- !u!4 &267518162
 Transform:
@@ -1403,12 +1403,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063761364}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6427876, y: -0, z: -0, w: 0.7660445}
-  m_LocalPosition: {x: -5, y: -4.3412056, z: 24.620195}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1257817764}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1063761366
 MonoBehaviour:
@@ -1467,8 +1467,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 140850242}
-  - {fileID: 1879074334}
-  - {fileID: 1063761365}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!1001 &1293220952
@@ -1783,7 +1781,7 @@ GameObject:
   - component: {fileID: 1879074336}
   - component: {fileID: 1879074335}
   m_Layer: 0
-  m_Name: Directional Light (1)
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1797,12 +1795,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879074333}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.24999997, y: -0.10938165, z: 0.23456967, w: 0.9330127}
-  m_LocalPosition: {x: -5, y: -3.820261, z: 21.665771}
+  m_LocalRotation: {x: 0.4082179, y: -0.23456968, z: 0.10938164, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1257817764}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1879074335
 MonoBehaviour:
@@ -1991,6 +1989,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1257817764}
+  - {fileID: 1063761365}
+  - {fileID: 1879074334}
   - {fileID: 462094058}
   - {fileID: 584248442}
   - {fileID: 736788169}
